@@ -1,20 +1,16 @@
-// Preventing Default Behavior
+import { useRef } from "react";
 
-import  Hero from "./component/Hero"
 const App = () => {
-function demo(e){
-  e.preventDefault();
-  alert(" form submit notificaton");
-}
- 
+  let tamim = useRef();
+
+  const change = () => {
+    tamim.current.innerText = "useRef() uses";
+  };
+
   return (
     <div>
-       <form onClick={demo}>
-        <input type=" name" placeholder="Name"></input>   
-        <button> Submit</button>   
- 
-       </form>
-      
+      <h1 ref={tamim}></h1>
+      <button onClick={change}>Click</button>
     </div>
   );
 };
