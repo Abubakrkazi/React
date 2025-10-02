@@ -1,16 +1,24 @@
 import { useRef } from "react";
-
+//useRef() Caching expensive computations
 const App = () => {
-  let tamim = useRef();
 
-  const change = () => {
-    tamim.current.innerText = "useRef() uses";
-  };
+  let APIData = useRef(null);
+  let myPtag = useRef();
+
+  const fetchData = async () => {
+    const response = await fetch("https://dummyjson.com/products");
+    APIData.current = await response.json();
+  }
+
+  const showData = () => {
+    myPtag.current.innerText = JSON.stringify(APIData.current);
+  }
 
   return (
     <div>
-      <h1 ref={tamim}></h1>
-      <button onClick={change}>Click</button>
+      <p ref={myPtag}></p>
+      <button onClick={fetchData}>Call API</button>
+      <button onClick={showData}>Show Data</button>
     </div>
   );
 };
